@@ -1,54 +1,64 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Local Group Import plugin for Moodle
+ * Settings for Local Group Import.
  *
  * @package    local_groupimport
  * @copyright  2026 Kevin Jarniac
- * @author     Kevin Jarniac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *
- * This plugin is developed as a personal project and is not private.
- * It is distributed under the terms of the GNU General Public License.
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
-    // Page de réglages du plugin local_groupimport.
-    $settings = new admin_settingpage('local_groupimport',
-        get_string('pluginname', 'local_groupimport'));
+    global $ADMIN, $DB;
+
+    // Plugin settings page.
+    $settings = new admin_settingpage(
+        'local_groupimport',
+        get_string('pluginname', 'local_groupimport')
+    );
 
     $ADMIN->add('localplugins', $settings);
 
-    global $DB;
-
-    // Tous les champs possibles pour identifier un utilisateur.
+    // All possible fields to identify a user.
     $fieldoptions = [
         'username' => get_string('username'),
-        'email'    => get_string('email'),
+        'email' => get_string('email'),
         'idnumber' => get_string('idnumber'),
     ];
 
-    // Ajout des champs de profil personnalisés.
-    if ($customfields = $DB->get_records('user_info_field', null, 'name ASC')) {
-        foreach ($customfields as $field) {
-            $key = 'profile_field_' . $field->shortname;
-            // On affiche juste le nom du champ perso.
-            $fieldoptions[$key] = format_string($field->name);
-        }
+    // Add custom profile fields.
+    $customfields = $DB->get_records('user_info_field', null, 'name ASC');
+    foreach ($customfields as $field) {
+        $key = 'profile_field_' . $field->shortname;
+        $fieldoptions[$key] = format_string($field->name);
     }
 
-    // 1) Multisélection : quels champs sont autorisés pour l'enseignant ?
+    // 1) Multi-select: which fields are allowed for teachers.
     $settings->add(new admin_setting_configmultiselect(
         'local_groupimport/alloweduserfields',
         get_string('alloweduserfields', 'local_groupimport'),
         get_string('alloweduserfields_desc', 'local_groupimport'),
-        ['username', 'email'],      // valeur par défaut.
+        ['username', 'email'], // Valeur par défaut.
         $fieldoptions
     ));
 
-    // 2) Sélection du champ par défaut.
+    // 2) Default field selection.
     $settings->add(new admin_setting_configselect(
         'local_groupimport/defaultuserfield',
         get_string('defaultuserfield', 'local_groupimport'),

@@ -1,72 +1,82 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Local Group Import plugin for Moodle
+ * English language strings for Local Group Import.
  *
  * @package    local_groupimport
  * @copyright  2026 Kevin Jarniac
- * @author     Kevin Jarniac
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *
- * This plugin is developed as a personal project and is not private.
- * It is distributed under the terms of the GNU General Public License.
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Group Import (CSV)';
-$string['groupimport'] = 'Group Import (CSV)';
+$string['pluginname'] = 'Group import (CSV)';
+$string['groupimport'] = 'Group import (CSV)';
 
-// Template & file import
+// Template and file import.
 $string['downloadtemplate'] = 'Download CSV template';
 $string['importfile'] = 'Import file (CSV)';
 $string['importfile_help'] = 'Upload a CSV file with the columns: useridentifier;groupname;groupingname (groupingname is optional). The separator may be ";" or ",". The "useridentifier" column is interpreted according to the user identification field chosen in the import form (username, email, idnumber or a custom profile field).';
 
-// Buttons & sections
+// Buttons and sections.
 $string['submitimport'] = 'Run import';
 $string['importresults'] = 'Import results';
 $string['importsummary'] = 'Import summary';
 
-// Results messages
+// Results messages.
 $string['successheader'] = 'Successfully processed lines';
 $string['errorheader'] = 'Lines with errors';
 $string['noresults'] = 'No results to display yet. Upload a CSV file to begin the import.';
 
-// Error messages
+// Error messages.
 $string['csvmissingcolumns'] = 'The CSV is missing one or more required columns: useridentifier, groupname (and optionally groupingname).';
 $string['csvloaderror'] = 'Error while reading the CSV file: {$a}';
 
-// Template filename
+// Template filename.
 $string['templatename'] = 'groupimport_template.csv';
 
-// Navigation
+// Navigation.
 $string['backtocourse'] = 'Back to course';
 
-// Privacy
-$string['privacy:metadata'] = 'The local groupimport plugin does not store any personal data. It only processes existing enrolment information.';
+// Privacy.
+$string['privacy:metadata'] = 'The Local Group Import plugin does not store any personal data. It only processes existing course enrolment information.';
 
-// -------------------------
-// ADMIN SETTINGS
-// -------------------------
+// -------------------------.
+// Admin settings.
+// -------------------------.
 
-// Allowed identification fields
+// Allowed identification fields.
 $string['alloweduserfields'] = 'User fields allowed for identification';
 $string['alloweduserfields_desc'] = 'Select which user fields can be used to identify learners in CSV import files (username, email, idnumber or any custom profile fields).';
 
-// Default identification field
+// Default identification field.
 $string['defaultuserfield'] = 'Default user identification field';
 $string['defaultuserfield_desc'] = 'This field will be pre-selected in the import form. It must be one of the allowed fields defined above.';
 
-// -------------------------
-// FORM: User identification field
-// -------------------------
+// -------------------------.
+// Form: User identification field.
+// -------------------------.
 
 $string['userfield'] = 'User identification field';
 $string['userfield_help'] = 'This option specifies how the "useridentifier" column of the CSV file should be interpreted—for example as a username, an email address, an ID number, or as the value of a custom profile field.';
 
-// -------------------------
-// GUIDED TOURS
-// -------------------------
+// -------------------------.
+// Guided tours.
+// -------------------------.
 
 $string['tour_groupimport_teacher_name'] = 'Guide: Group import (teachers)';
 $string['tour_groupimport_teacher_desc'] = 'Guided tour to import groups and enrolments from a CSV file, with checks on user existence and course enrolment.';
@@ -78,7 +88,7 @@ $string['tour_groupimport_step2_title'] = 'Download the CSV template';
 $string['tour_groupimport_step2_content'] = 'Start by downloading the template to ensure the expected columns are respected (useridentifier, groupname and optionally groupingname).';
 
 $string['tour_groupimport_step3_title'] = 'Upload your CSV file';
-$string['tour_groupimport_step3_content'] = 'Then select your CSV file. Both “;” and “,” separators are supported.';
+$string['tour_groupimport_step3_content'] = 'Then select your CSV file. Both ";" and "," separators are supported.';
 
 $string['tour_groupimport_step4_title'] = 'Choose the identification field';
 $string['tour_groupimport_step4_content'] = 'Choose how users should be identified (username, email, idnumber or a custom profile field).';
@@ -92,10 +102,4 @@ $string['tour_groupimport_step6_content'] = 'The report details completed enrolm
 $string['tour_groupimport_coursehome_name'] = 'Tip: Find Group import in the More menu';
 $string['tour_groupimport_coursehome_desc'] = 'On the course home page, shows where to find the group import entry.';
 $string['tour_groupimport_coursehome_step1_title'] = 'Where is Group import?';
-$string['tour_groupimport_coursehome_step1_content'] = 'In the navigation at the top of the course, open the “More” menu. You will find “Group import” there to access the tool.';
-
-$string['tour_groupimport_coursehome_name'] = 'Astuce : Import de groupes dans le menu Plus';
-$string['tour_groupimport_coursehome_desc'] = 'Sur l’accueil du cours, indique où trouver l’entrée d’import de groupes.';
-$string['tour_groupimport_coursehome_step1_title'] = 'Où trouver l’import de groupes ?';
-$string['tour_groupimport_coursehome_step1_content'] = 'Dans la navigation en haut du cours, ouvrez le menu « Plus ». Vous y trouverez l’entrée « Import de groupes » pour accéder à l’outil.';
-
+$string['tour_groupimport_coursehome_step1_content'] = 'In the navigation at the top of the course, open the "More" menu. You will find "Group import" there to access the tool.';
