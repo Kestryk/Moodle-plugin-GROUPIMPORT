@@ -47,13 +47,16 @@ $string['csvmissingcolumns'] = 'The CSV is missing one or more required columns:
 $string['csvloaderror'] = 'Error while reading the CSV file: {$a}';
 $string['csvempty'] = 'The CSV file is empty.';
 $string['csvinvalidrowmissing'] = 'Invalid line: missing useridentifier or groupname.';
-$string['usernotfound'] = "User '{$a}' not found.";
-$string['usernotenrolled'] = "User '{$a}' is not enrolled in this course.";
-$string['usermultiplematches'] = "Multiple users match '{$a->identifier}' for field '{$a->field}'.";
-$string['groupcreatefailed'] = "Unable to create group '{$a->groupname}' for user '{$a->identifier}'.";
-$string['groupingcreatefailed'] = "Unable to create grouping '{$a->groupingname}' for group '{$a->groupname}'.";
-$string['useralreadyingroup'] = "User '{$a->identifier}' is already a member of group '{$a->groupname}'.";
-$string['useraddedtogroup'] = "User '{$a->identifier}' added to group '{$a->groupname}'.";
+// IMPORTANT: use single quotes to avoid PHP interpolating {$a} at lang file load time.
+$string['usernotfound'] = 'User \'{$a}\' not found.';
+$string['usernotenrolled'] = 'User \'{$a}\' is not enrolled in this course.';
+$string['usermultiplematches'] = 'Multiple users match \'{$a->identifier}\' for field \'{$a->field}\'.';
+$string['groupcreatefailed'] = 'Unable to create group \'{$a->groupname}\' for user \'{$a->identifier}\'.';
+$string['groupingcreatefailed'] = 'Unable to create grouping \'{$a->groupingname}\' for group \'{$a->groupname}\'.';
+$string['useralreadyingroup'] = 'User \'{$a->identifier}\' is already a member of group \'{$a->groupname}\'.';
+$string['useraddedtogroup'] = 'User \'{$a->identifier}\' added to group \'{$a->groupname}\'.';
+$string['useraddedtogroupwithgrouping'] = 'User \'{$a->identifier}\' added to group \'{$a->groupname}\' (grouping \'{$a->groupingname}\').';
+
 
 // Template filename.
 $string['templatename'] = 'groupimport_template.csv';

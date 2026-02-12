@@ -47,13 +47,15 @@ $string['csvmissingcolumns'] = 'Le CSV ne contient pas toutes les colonnes requi
 $string['csvloaderror'] = 'Erreur lors de la lecture du fichier CSV : {$a}.';
 $string['csvempty'] = 'Le fichier CSV est vide.';
 $string['csvinvalidrowmissing'] = 'Ligne invalide : identifiant utilisateur ou nom du groupe manquant.';
-$string['usernotfound'] = "Utilisateur '{$a}' introuvable.";
-$string['usernotenrolled'] = "L'utilisateur '{$a}' n'est pas inscrit à ce cours.";
-$string['usermultiplematches'] = "Plusieurs utilisateurs correspondent à '{$a->identifier}' pour le champ '{$a->field}'.";
-$string['groupcreatefailed'] = "Impossible de créer le groupe '{$a->groupname}' pour l'utilisateur '{$a->identifier}'.";
-$string['groupingcreatefailed'] = "Impossible de créer le groupement '{$a->groupingname}' pour le groupe '{$a->groupname}'.";
-$string['useralreadyingroup'] = "L'utilisateur '{$a->identifier}' est déjà membre du groupe '{$a->groupname}'.";
-$string['useraddedtogroup'] = "L'utilisateur '{$a->identifier}' a été ajouté au groupe '{$a->groupname}'.";
+// IMPORTANT: use single quotes to avoid PHP interpolating {$a} at lang file load time.
+$string['usernotfound'] = 'Utilisateur \'{$a}\' introuvable.';
+$string['usernotenrolled'] = 'L\'utilisateur \'{$a}\' n\'est pas inscrit à ce cours.';
+$string['usermultiplematches'] = 'Plusieurs utilisateurs correspondent à \'{$a->identifier}\' pour le champ \'{$a->field}\'.';
+$string['groupcreatefailed'] = 'Impossible de créer le groupe \'{$a->groupname}\' pour l\'utilisateur \'{$a->identifier}\'.';
+$string['groupingcreatefailed'] = 'Impossible de créer le groupement \'{$a->groupingname}\' pour le groupe \'{$a->groupname}\'.';
+$string['useralreadyingroup'] = 'L\'utilisateur \'{$a->identifier}\' est déjà membre du groupe \'{$a->groupname}\'.';
+$string['useraddedtogroup'] = 'L\'utilisateur \'{$a->identifier}\' a été ajouté au groupe \'{$a->groupname}\'.';
+$string['useraddedtogroupwithgrouping'] = 'L\'utilisateur \'{$a->identifier}\' a été ajouté au groupe \'{$a->groupname}\' (groupement \'{$a->groupingname}\').';
 
 // Nom du fichier modèle.
 $string['templatename'] = 'modele_import_groupes.csv';

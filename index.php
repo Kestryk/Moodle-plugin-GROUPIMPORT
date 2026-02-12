@@ -182,12 +182,34 @@ if ($mform->is_cancelled()) {
             if ($identifierindex === false || $groupnameindex === false) {
                 $errors[] = get_string('csvmissingcolumns', 'local_groupimport');
             } else {
+                /**
+             * Clean a CSV cell value (handles BOM, NBSP, zero-width, trims).
+             */
+            function local_groupimport_clean_cell(string $value): string {
+                // Remove BOM if it somehow appears at cell level.
+                $value = preg_replace('/^\xEF\xBB\xBF/u', '', $value);
+
+                // Convert non-breaking spaces to normal spaces.
+                $value = str_replace("\xC2\xA0", ' ', $value);
+
+                // Remove common zero-width characters.
+                $value = preg_replace('/[\x{200B}\x{200C}\x{200D}\x{FEFF}]/u', '', $value);
+
+                // Trim standard whitespace.
+                return trim($value);
+            }
                 foreach ($rows as $line) {
-                    $identifier = isset($line[$identifierindex]) ? trim($line[$identifierindex]) : '';
-                    $groupname = isset($line[$groupnameindex]) ? trim($line[$groupnameindex]) : '';
-                    $groupingname = ($groupingindex !== false && isset($line[$groupingindex]))
-                        ? trim($line[$groupingindex])
-                        : '';
+                $identifier = ($identifierindex !== false && isset($line[$identifierindex]))
+                    ? local_groupimport_clean_cell($line[$identifierindex])
+                    : '';
+
+                $groupname = ($groupnameindex !== false && isset($line[$groupnameindex]))
+                    ? local_groupimport_clean_cell($line[$groupnameindex])
+                    : '';
+
+                $groupingname = ($groupingindex !== false && isset($line[$groupingindex]))
+                    ? local_groupimport_clean_cell($line[$groupingindex])
+                    : '';
 
                     if ($identifier === '' && $groupname === '') {
                         continue;
@@ -197,6 +219,9 @@ if ($mform->is_cancelled()) {
                         $errors[] = get_string('csvinvalidrowmissing', 'local_groupimport');
                         continue;
                     }
+                    if ($userfield === 'email') {
+                    $identifier = strtolower(preg_replace('/\s+/u', '', $identifier));
+                }
 
                     // 1. Find the user according to the chosen field.
                     $user = null;
@@ -225,14 +250,20 @@ if ($mform->is_cancelled()) {
                         ];
 
                         $users = $DB->get_records_sql($sql, $params);
+
                         if (count($users) === 1) {
                             $user = reset($users);
+
                         } else if (count($users) > 1) {
                             $a = (object)['identifier' => $identifier, 'field' => $shortname];
                             $errors[] = get_string('usermultiplematches', 'local_groupimport', $a);
+                            continue; // IMPORTANT: ne pas continuer le traitement de cette ligne
+
+                        } else { // 0 résultat
+                            $errors[] = get_string('usernotfound', 'local_groupimport', $identifier);
+                            continue; // IMPORTANT
                         }
                     }
-
                     if (!$user) {
                         $errors[] = get_string('usernotfound', 'local_groupimport', $identifier);
                         continue;
@@ -293,22 +324,28 @@ if ($mform->is_cancelled()) {
                         }
                     }
 
-                    // 5. Add the user to the group (no duplicates).
-                    if (!groups_is_member($groupid, $user->id)) {
-                        groups_add_member($groupid, $user->id);
+                  // 5. Add the user to the group (no duplicates).
+                if (!groups_is_member($groupid, $user->id)) {
+                    groups_add_member($groupid, $user->id);
 
-                        $msg = "Utilisateur '$identifier' ajouté au groupe '$groupname'";
-                        if (!empty($groupingname)) {
-                            $msg .= " (groupement '$groupingname')";
-                        }
+                    $a = (object)[
+                        'identifier' => $identifier,
+                        'groupname' => $groupname,
+                    ];
 
-                        $success[] = $msg . '.';
+                    if (!empty($groupingname)) {
+                        $a->groupingname = $groupingname;
+                        $success[] = get_string('useraddedtogroupwithgrouping', 'local_groupimport', $a);
                     } else {
-                        $a = (object)['identifier' => $identifier, 'groupname' => $groupname];
-                        $errors[] = get_string('useralreadyingroup', 'local_groupimport', $a);
+                        $success[] = get_string('useraddedtogroup', 'local_groupimport', $a);
                     }
+                } else {
+                    $a = (object)['identifier' => $identifier, 'groupname' => $groupname];
+                    $errors[] = get_string('useralreadyingroup', 'local_groupimport', $a);
                 }
-            }
+
+                                }
+                            }
         }
     }
 }
