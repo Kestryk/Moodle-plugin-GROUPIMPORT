@@ -1,19 +1,20 @@
 # 📦 Local Group Import (Moodle Plugin)
 
-## Overview
+## > Overview
 
-**Local Group Import** is a Moodle *local plugin* that allows teachers to **import groups and enrol students into them using a CSV file**, directly from within a course.
+**Group Import** is a Moodle *local plugin* that allows teachers to **import groups and enrol students into them using a CSV file**, directly from within a course.
 
 The plugin is designed to be **safe, robust, and teacher-friendly**, ensuring that:
-- only **existing users** are processed,
-- only users **already enrolled in the course** can be added to groups,
-- the import **never stops on errors**,
-- a **detailed report** is provided after each import,
-- **guided tours (User Tours)** help teachers discover and use the tool effectively.
+
+- only **existing users** are processed  
+- only users **already enrolled in the course** can be added to groups  
+- the import **never stops on errors**  
+- a **detailed report** is provided after each import  
+- **guided tours (User Tours)** help teachers discover and use the tool effectively  
 
 ---
 
-## 🎯 Goals
+## > Goals
 
 - Simplify group management for teachers  
 - Prevent common CSV import errors  
@@ -23,16 +24,18 @@ The plugin is designed to be **safe, robust, and teacher-friendly**, ensuring th
 
 ---
 
-## ✨ Key Features
+## > ✨ Key Features
 
 ### CSV Group Import
+
 - Import groups from a CSV file  
 - Enrol users into groups  
 - Optional creation of groupings  
 - Supports `;` and `,` as CSV separators  
 
 ### Safety & Validation
-- No user creation  
+
+- No user creation through the file  
 - No course enrolment  
 - Each row is validated independently:
   - user not found  
@@ -41,11 +44,13 @@ The plugin is designed to be **safe, robust, and teacher-friendly**, ensuring th
   - group already exists  
 
 ### Import Report
+
 - Lists successful group enrolments  
 - Lists errors with clear explanations  
 - Import continues even if some rows fail  
 
 ### Guided Tours (User Tours)
+
 - Guided tour on the Group Import page  
 - Guided tour on the course home page (More menu)  
 - Automatically installed  
@@ -64,20 +69,19 @@ The plugin is designed to be **safe, robust, and teacher-friendly**, ensuring th
 
 ### Required Columns
 
-| Column | Required | Description |
-|------|----------|-------------|
-| useridentifier | Yes | Username, email, idnumber, or custom profile field |
-| groupname | Yes | Group name |
-| groupingname | No | Grouping name |
+| Column         | Required | Description |
+|---------------|----------|-------------|
+| useridentifier | Yes      | Username, email, idnumber, or custom profile field |
+| groupname      | Yes      | Group name |
+| groupingname   | No       | Grouping name |
 
 ### Example
 
-useridentifier;groupname;groupingname  
-jdupont;Group A;Tutorial groups  
-asmith;Group B;Tutorial groups  
-
----
-
+```text
+useridentifier;groupname;groupingname
+jdupont;Group A;Tutorial groups
+asmith;Group B;Tutorial groups
+```
 ## 👩‍🏫 User Workflow
 
 1. Open the course  
@@ -100,6 +104,7 @@ asmith;Group B;Tutorial groups
 ## 🔐 Permissions
 
 Accessible to:
+
 - Teachers  
 - Editing teachers  
 - Course managers  
@@ -110,7 +115,7 @@ Accessible to:
 
 - Plugin type: Local (`local/groupimport`)  
 - Minimum Moodle version: 4.1  
-- Compatible with Moodle 4.x  
+- Compatible with Moodle 4.x up to 5.1  
 
 ---
 
@@ -123,10 +128,18 @@ Accessible to:
 
 ## 🧪 Maturity
 
-`MATURITY_BETA`
+`MATURITY_STABLE`
 
 ---
 
 ## 📄 License
 
 GNU General Public License v3 (GPLv3)
+
+---
+
+## 🗺 Roadmap & Contributions
+
+A public roadmap is available in the project wiki, outlining upcoming improvements and planned features.
+
+Suggestions for additional features, enhancements, or improvements are welcome. Feedback from teachers and/or administrators is encouraged.
